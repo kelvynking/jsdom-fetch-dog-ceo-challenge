@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    const addImages = data => {
+        const container = document.querySelector("#dog-image-container")
+        data.message.forEach(url => {
+            const image = document.createElement("img")
+            image.src = url
+            container.appendChild(image)
+        })
+    }
     fetch("https://dog.ceo/api/breeds/image/random/4")
     .then(resp => resp.json())
-    .then(json => addImages(json))
+    .then(addImages)
+    .catch(error => console.log(error))
 })
-
-function addImages(images) {
-    let container = document.getElementById("dog-image-container");
-    images.message.forEach(element => {
-        let image = document.createElement("img")
-        image.src = element;
-        container.appendChild(image);
-    })
-}
